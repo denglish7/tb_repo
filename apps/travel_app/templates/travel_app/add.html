@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="utf-8">
+        <title></title>
+    </head>
+    <body>
+        <div class="wrapper">
+            <h2>Add a trip</h2>
+            <form class="" action="{%url 'travel_app:logoff' %}" method="post">
+                {% csrf_token %}
+                <input type="submit" name="" value="Log off">
+            </form>
+            {% for message in messages %}
+                {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+                    <h3>{{message}}</h3>
+                {% endif %}
+            {% endfor %}
+            <form class="" action="{%url 'travel_app:add_trip' %}" method="post">
+                {% csrf_token %}
+                Destination: <input type="text" name="destination" value="">
+                Description: <input type="text" name="description" value="">
+                Travel Date From: <input type="date" name="travel_date_from">
+                Travel Date To: <input type="date" name="travel_date_to">
+                <input type="submit" name="submit" value="Add">
+            </form>
+            <a href="{% url 'travel_app:index' %}">Home</a>
+        </div>
+    </body>
+</html>

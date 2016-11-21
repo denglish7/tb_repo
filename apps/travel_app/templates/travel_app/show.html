@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="utf-8">
+        <title></title>
+    </head>
+    <body>
+        <div class="wrapper">
+            <form class="" action="{%url 'travel_app:logoff' %}" method="post">
+                {% csrf_token %}
+                <input type="submit" name="" value="Log off">
+            </form>
+            <a href="{% url 'travel_app:index' %}">Home</a>
+            {% for plan in destination %}
+                <h2>{{plan.destination}}</h2>
+                <h3>Planned By: {{plan.user_plans.first_name}} {{plan.user_plans.last_name}}</h3>
+                <h3>Description: {{plan.description}}</h3>
+                <h3>Travel Date From: {{plan.travel_date_from}}</h3>
+                <h3>Travel Date To: {{plan.travel_date_to}}</h3>
+            {% endfor %}
+            <h2>Other users' joining the trip:</h2>
+            {% for user in other_users %}
+                <h3>{{user.first_name}} {{user.last_name}}</h3>
+            {% endfor %}
+        </div>
+    </body>
+</html>

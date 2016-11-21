@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="utf-8">
+        <title></title>
+    </head>
+    <body>
+        <div class="wrapper">
+            <form class="" action="{%url 'travel_app:logoff' %}" method="post">
+                {% csrf_token %}
+                <input type="submit" name="" value="Log off">
+            </form>
+            <h2>Hello, {{user.first_name}}!</h2>
+            <h4>Your Trip Schedules</h4>
+            <a href="{% url 'travel_app:add_page' %}">Add Travel Plan</a>
+            <table>
+                <tr>
+                    <th>Destination</th>
+                    <th>Travel Start Date</th>
+                    <th>Travel End Date</th>
+                    <th>Plan</th>
+                </tr>
+                    {% for plan in plans %}
+                    <tr>
+                        <td><a href="{% url 'travel_app:my_show' id=plan.id %}">{{plan.destination}}</a></td>
+                        <td>{{plan.travel_date_from}}</td>
+                        <td>{{plan.travel_date_to}}</td>
+                        <td>{{plan.description}}</td>
+                    </tr>
+                    {% endfor %}
+            </table>
+            <h4>Other User's Travel Plans</h4>
+            <table>
+                <tr>
+                    <th>Name</th>
+                    <th>Destination</th>
+                    <th>Travel Start Date</th>
+                    <th>Travel End Date</th>
+                    <th>Do You Want to Join?</th>
+                </tr>
+
+                {% for plan in others_plans %}
+                <tr>
+                    <td>{{plan.user_plans.first_name}}</td>
+                    <td><a href="{% url 'travel_app:my_show' id=plan.id %}">{{plan.destination}}</a></td>
+                    <td>{{plan.travel_date_from}}</td>
+                    <td>{{plan.travel_date_to}}</td>
+                    <td><a href="{% url 'travel_app:my_join' id=plan.id %}">Join</a></td>
+                </tr>
+                {% endfor %}
+
+            </table>
+        </div>
+    </body>
+</html>
